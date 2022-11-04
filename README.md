@@ -1,8 +1,13 @@
-# Criteo SONiC utilies
+# Criteo SONiC utilities
 
 This repository contains scripts and patches required to run our [SONiC Saltstack modules](https://github.com/criteo/sonic-saltstack).
 
 We aim to merge this patch / utilities with the official repositories at some point.
+
+## Supported versions
+
+- 201911
+- 202205
 
 ## SONiC patches
 
