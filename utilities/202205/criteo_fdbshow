@@ -1,6 +1,9 @@
 #!/usr/bin/python3
 
 """
+    This file is a modified version fdbshow in https://github.com/sonic-net/sonic-utilities
+    It adds JSON output support.
+
     Script to show MAC/FDB entries learnt in Hardware
 
     usage: criteo_fdbshow [-p PORT] [-v VLAN]

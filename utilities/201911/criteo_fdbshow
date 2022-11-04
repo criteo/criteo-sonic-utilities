@@ -1,5 +1,8 @@
 #!/usr/bin/python
 """
+    This file is a modified version fdbshow in https://github.com/sonic-net/sonic-utilities
+    It adds JSON output support.
+
     Script to show MAC/FDB entries learnt in Hardware / fixed from fdbshow in 201911
     In long term, this will be replaced by the official sonic-utilies version (in python3).
 
