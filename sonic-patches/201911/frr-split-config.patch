@@ -1,0 +1,60 @@
+From 77084b68c9063fc653e1763c498c9918d387e98f Mon Sep 17 00:00:00 2001
+From: Kevin Petremann
+Date: Wed, 27 Jan 2021 12:47:10 +0100
+Subject: [PATCH] Split config mode for FRR
+
+Split mode is a custom one:
+- it does not generate FRR config using integrated jinja template
+- hence, it uses the frr.conf from the mounted volume (/etc/sonic/frr/)
+
+This commit removes the other modes: unified and separated (which was the default)
+
+Change-Id: I6c7883c2608a3f6653c10358fca2f3a60eb4b9d4
+---
+ dockers/docker-fpm-frr/start.sh | 17 +++--------------
+ 1 file changed, 3 insertions(+), 14 deletions(-)
+
+diff --git a/dockers/docker-fpm-frr/start.sh b/dockers/docker-fpm-frr/start.sh
+index f7d16cd0..7cb0d6ec 100755
+--- a/dockers/docker-fpm-frr/start.sh
++++ b/dockers/docker-fpm-frr/start.sh
+@@ -7,10 +7,6 @@ CFGGEN_PARAMS=" \
+     -d \
+     -y /etc/sonic/constants.yml \
+     -t /usr/share/sonic/templates/frr_vars.j2 \
+-    -t /usr/share/sonic/templates/bgpd/bgpd.conf.j2,/etc/frr/bgpd.conf \
+-    -t /usr/share/sonic/templates/zebra/zebra.conf.j2,/etc/frr/zebra.conf \
+-    -t /usr/share/sonic/templates/staticd/staticd.conf.j2,/etc/frr/staticd.conf \
+-    -t /usr/share/sonic/templates/frr.conf.j2,/etc/frr/frr.conf \
+     -t /usr/share/sonic/templates/isolate.j2,/usr/sbin/bgp-isolate \
+     -t /usr/share/sonic/templates/unisolate.j2,/usr/sbin/bgp-unisolate \
+ "
+@@ -46,13 +42,8 @@ if [[ ! -z "$NAMESPACE_ID" ]]; then
+    update_default_gw 6
+ fi
+
+-if [ -z "$CONFIG_TYPE" ] || [ "$CONFIG_TYPE" == "separated" ]; then
+-    echo "no service integrated-vtysh-config" > /etc/frr/vtysh.conf
+-    rm -f /etc/frr/frr.conf
+-elif [ "$CONFIG_TYPE" == "unified" ]; then
+-    echo "service integrated-vtysh-config" > /etc/frr/vtysh.conf
+-    rm -f /etc/frr/bgpd.conf /etc/frr/zebra.conf /etc/frr/staticd.conf
+-fi
++echo "service integrated-vtysh-config" > /etc/frr/vtysh.conf
++rm -f /etc/frr/bgpd.conf /etc/frr/zebra.conf /etc/frr/staticd.conf
+
+ chown -R frr:frr /etc/frr/
+
+@@ -79,9 +70,7 @@ supervisorctl start zebra
+ supervisorctl start staticd
+ supervisorctl start bgpd
+
+-if [ "$CONFIG_TYPE" == "unified" ]; then
+-    supervisorctl start vtysh_b
+-fi
++supervisorctl start vtysh_b
+
+ supervisorctl start fpmsyncd
+
+--
+2.30.0
