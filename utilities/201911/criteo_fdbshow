@@ -23,7 +23,6 @@ import sys
 
 from natsort import natsorted
 from swsssdk import SonicV2Connector, port_util
-from tabulate import tabulate
 
 class FdbShow(object):
 
@@ -132,8 +131,6 @@ class FdbShow(object):
             output.append(zipped_entry)
 
         print json.dumps(output)
-        # print tabulate(output, self.HEADER)
-        # print "Total number of entries {0} ".format(self.FDB_COUNT)
 
 
 def main():
@@ -141,6 +138,8 @@ def main():
                                      formatter_class=argparse.RawTextHelpFormatter)
     parser.add_argument('-p', '--port', type=str, help='FDB learned on specific port: Ethernet0', default=None)
     parser.add_argument('-v', '--vlan', type=str, help='FDB learned on specific Vlan: 1001', default=None)
+    # the -j arg is not used, it is just here to ensure compatibility with the >= 202205 script version
+    parser.add_argument('-j', '--json', action='store_true', help='JSON output')
     args = parser.parse_args()
 
     try:
