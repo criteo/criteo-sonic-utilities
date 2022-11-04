@@ -18,8 +18,11 @@ This is required if you want to manage BGP configuration with our Salt modules.
 Be careful, this patch changes the way the BGP configuration is provisioned. By default, SONiC computes the configuration from variables in the config_db.json and embedded template in the container. Meaning, any changes via VTYSH are not persistent.
 
 There are two ways to apply it:
-- build and install your own SONiC image with our patch
-- apply the patch in live on your devices, copy your FRR config on SONiC in `/etc/sonic/frr` and restart the BGP container (be careful to not break your production!)
+- build and install your own SONiC image with our patch (recommended)
+- apply the patch in live on your devices:
+  - ensure the docker is started with `-v /etc/sonic/frr:/etc/frr:rw` in `/usr/bin/bgp.sh)`
+  - copy your FRR config on SONiC in `/etc/sonic/frr`
+  - and restart the BGP container (be careful to not break your production!)
 
 ## Utilities
 
