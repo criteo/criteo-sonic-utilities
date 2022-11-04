@@ -1,4 +1,8 @@
-#!/usr/bin/python
+#!/usr/bin/python3
+"""
+    This file is derivated from scripts in https://github.com/sonic-net/sonic-utilities
+    It merges several interface information into a single command.
+"""
 
 import json
 import swsssdk
