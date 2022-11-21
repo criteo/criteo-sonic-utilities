@@ -19,7 +19,7 @@ It contains SONiC build image patches required to fully benefit from our Salt mo
 
 **This patch has been merged upstream (see our commit [here](https://github.com/sonic-net/sonic-buildimage/commit/9d3814045bf950576bb274180ffec001abac1c32)).**
 
-You only need to apply it manually if you are running a SONiC release which does not have "split-unified" feature (SONiC < 202205).
+You only need to apply it manually if you are running a SONiC release which does not have the "split-unified" feature (SONiC < 202205).
 
 <details>
 This patch is about mounting FRR directory in the container, basically `-v /etc/frr/:/etc/sonic/frr/`.
