@@ -37,4 +37,4 @@ Important note: this script are inspired or derived from official SONiC scripts 
 
 It contains some custom tools we use in our Salt modules. These are either patches of existing scripts (to add JSON support for instance), or custom scripts to get more info at once.
 
-You just need to install them on the devices in `/opt/salt/scripts/` directory. You can use a [Salt state](sonic-patches/install.sls) to do that (or a simple scp).
+You just need to install them on the devices in `/opt/salt/scripts/` directory. You can use a [Salt state](utilities/install.sls) to do that (or a simple scp).
