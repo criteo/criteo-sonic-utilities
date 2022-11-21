@@ -17,7 +17,13 @@ It contains SONiC build image patches required to fully benefit from our Salt mo
 
 ### FRR mounted configuration
 
-At this moment, the only patch is the one about mounting FRR directory in the container, basically `-v /etc/frr/:/etc/sonic/frr/`.
+**This patch has been merged upstream (see our commit [here](https://github.com/sonic-net/sonic-buildimage/commit/9d3814045bf950576bb274180ffec001abac1c32)).**
+
+You only need to apply it manually if you are running a SONiC release which does not have "split-unified" feature (SONiC < 202205).
+
+<details>
+This patch is about mounting FRR directory in the container, basically `-v /etc/frr/:/etc/sonic/frr/`.
+
 This is required if you want to manage BGP configuration with our Salt modules.
 
 Be careful, this patch changes the way the BGP configuration is provisioned. By default, SONiC computes the configuration from variables in the config_db.json and embedded template in the container. Meaning, any changes via VTYSH are not persistent.
@@ -28,6 +34,7 @@ There are two ways to apply it:
   - ensure the docker is started with `-v /etc/sonic/frr:/etc/frr:rw` in `/usr/bin/bgp.sh)`
   - copy your FRR config on SONiC in `/etc/sonic/frr`
   - and restart the BGP container (be careful to not break your production!)
+</details>
 
 ## Utilities
 
