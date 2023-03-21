@@ -2,7 +2,7 @@
 
 This repository contains scripts and patches required to run our [SONiC Saltstack modules](https://github.com/criteo/sonic-saltstack).
 
-We aim to merge this patch / utilities with the official repositories at some point.
+We aim to merge thes patches / utilities with the official repositories at some point.
 
 ## Supported versions
 
@@ -33,14 +33,14 @@ There are two ways to apply it:
 - apply the patch in live on your devices:
   - ensure the docker is started with `-v /etc/sonic/frr:/etc/frr:rw` in `/usr/bin/bgp.sh)`
   - copy your FRR config on SONiC in `/etc/sonic/frr`
-  - and restart the BGP container (be careful to not break your production!)
+  - and restart the BGP container (be careful not to break your production!)
 </details>
 
 ## Utilities
 
 Location: [utilities](utilities)
 
-Important note: this script are inspired or derived from official SONiC scripts ([SONiC utilities](https://github.com/sonic-net/sonic-utilities)).
+Important note: this script is inspired or derived from official SONiC scripts ([SONiC utilities](https://github.com/sonic-net/sonic-utilities)).
 
 It contains some custom tools we use in our Salt modules. These are either patches of existing scripts (to add JSON support for instance), or custom scripts to get more info at once.
 
